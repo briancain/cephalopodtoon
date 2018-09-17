@@ -33,12 +33,13 @@ public class Player : MonoBehaviour {
     Vector3 playerPos = gameObject.transform.position;
     Vector3 playerDirection = gameObject.transform.forward;
     Quaternion playerRotation = gameObject.transform.rotation;
-    float spawnDistance = 10;
+    float spawnDistance = 2;
+    float bulletForce = 10;
     Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
 
     GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
 
-    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletForce;
 
     Destroy(bullet, 2.0f);
   }
