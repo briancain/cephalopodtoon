@@ -5,6 +5,10 @@ using UnityEngine;
 public class Fire : MonoBehaviour {
 
   private Rigidbody rb;
+
+  [SerializeField]
+  Material blue;
+
   // Use this for initialization
   void Start () {
     rb = GetComponent<Rigidbody>();
@@ -16,6 +20,7 @@ public class Fire : MonoBehaviour {
   void OnCollisionEnter(Collision collider) {
     if (collider.gameObject.CompareTag("Background")) {
       rb.velocity = new Vector3(0,0,0);
+      // Render splat
     }
   }
 }
