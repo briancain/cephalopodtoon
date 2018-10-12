@@ -6,6 +6,11 @@ public class Player : MonoBehaviour {
 
   [SerializeField]
   float playerSpeed;
+  [SerializeField]
+  GameObject bulletPrefab;
+
+  [SerializeField]
+  Transform bulletSpawn;
 
   private Rigidbody rb;
 
@@ -13,11 +18,7 @@ public class Player : MonoBehaviour {
   private float nextFire = 0.5f;
   private float fireTime = 0.0f;
 
-  [SerializeField]
-  GameObject bulletPrefab;
-
-  [SerializeField]
-  Transform bulletSpawn;
+  private float playerHealth = 100f;
 
   // Use this for initialization
   void Start () {
