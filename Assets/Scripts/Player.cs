@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
       float spawnDistance = 2;
       float bulletForce = 20;
       Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
+      spawnPos.y = spawnPos.y + 0.5f;
 
       GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
 
