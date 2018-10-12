@@ -64,4 +64,14 @@ public class Player : MonoBehaviour {
 
     rb.velocity =  movement * playerSpeed;
   }
+
+  void OnCollisionEnter(Collision col) {
+    if (col.gameObject.CompareTag("Ink")) {
+      playerHealth = playerHealth - 10f;
+      if (playerHealth <= 0f) {
+        // DEATH
+        Debug.Log("Player dead");
+      }
+    }
+  }
 }
