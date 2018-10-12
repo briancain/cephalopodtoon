@@ -20,16 +20,20 @@ public class Player : MonoBehaviour {
 
   private float playerHealth = 100f;
 
+  private bool isDown;
+
   // Use this for initialization
   void Start () {
     rb = GetComponent<Rigidbody>();
     playerSpeed = 5;
+    isDown = false;
   }
   // Update is called once per frame
   void Update () {
    if (Input.GetButton("Fire1")) {
      Fire();
    }
+
   }
 
   void Fire() {
@@ -63,7 +67,24 @@ public class Player : MonoBehaviour {
 
     Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
+    Swim();
+
     rb.velocity =  movement * playerSpeed;
+  }
+
+  void Swim() {
+    // TODO: FIXME: :p
+    Vector3 position = transform.position;
+     if (Input.GetButton("Fire2") && !isDown) {
+       isDown = true;
+       position = Vector2.Lerp(position, new Vector2(position.x, position.y - 1.2f), 0.1f);
+     }
+
+     if (Input.GetButtonUp("Fire2") && isDown) {
+       isDown = false;
+       position = Vector2.Lerp(position, new Vector2(position.x, position.y + 1.2f), 0.1f);
+     }
+     transform.position = position;
   }
 
   void OnCollisionEnter(Collision col) {
