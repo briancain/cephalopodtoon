@@ -9,6 +9,9 @@ public class Player : MonoBehaviour {
 
   private Rigidbody rb;
 
+  private float fireDelta = 0.1f;
+  private float nextFire = 0.5f;
+  private float fireTime = 0.0f;
 
   [SerializeField]
   GameObject bulletPrefab;
@@ -23,25 +26,33 @@ public class Player : MonoBehaviour {
   }
   // Update is called once per frame
   void Update () {
-   if (Input.GetKeyDown(KeyCode.Space)) {
+   if (Input.GetButton("Fire1")) {
      Fire();
    }
   }
 
   void Fire() {
+    fireTime = fireTime + Time.deltaTime;
 
-    Vector3 playerPos = gameObject.transform.position;
-    Vector3 playerDirection = gameObject.transform.forward;
-    Quaternion playerRotation = gameObject.transform.rotation;
-    float spawnDistance = 2;
-    float bulletForce = 20;
-    Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
+    if (fireTime > nextFire) {
+      nextFire = fireTime + fireDelta;
 
-    GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
+      Vector3 playerPos = gameObject.transform.position;
+      Vector3 playerDirection = gameObject.transform.forward;
+      Quaternion playerRotation = gameObject.transform.rotation;
+      float spawnDistance = 2;
+      float bulletForce = 20;
+      Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
 
-    bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletForce;
+      GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
 
-    Destroy(bullet, 2.0f);
+      bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletForce;
+
+      Destroy(bullet, 2.0f);
+
+      nextFire = nextFire - fireTime;
+      fireTime = 0.0f;
+    }
   }
 
   void FixedUpdate() {
