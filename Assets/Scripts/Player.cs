@@ -67,7 +67,7 @@ public class Player : MonoBehaviour {
 
     Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-    Swim();
+    //Swim();
 
     rb.velocity =  movement * playerSpeed;
   }
