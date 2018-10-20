@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
   [SerializeField]
   Transform bulletSpawn;
 
+  private Transform cameraTransform;
   private Rigidbody rb;
 
   private float fireDelta = 0.1f;
@@ -62,17 +63,30 @@ public class Player : MonoBehaviour {
   }
 
   void FixedUpdate() {
+    Vector3 movement = GetLeftInput();
+    Vector3 cameraMovement = GetRightInput();
+    //Swim();
+
+    RotateCamera(cameraMovement);
+    rb.velocity =  movement * playerSpeed;
+  }
+
+  void RotateCamera(Vector3 cameraMovement) {
+    GameObject.Find("Main Camera").transform.RotateAround(this.transform.position, new Vector3(0f, cameraMovement.y, 0f), 5.0f);
+  }
+
+  private Vector3 GetLeftInput() {
     float moveHorizontal = Input.GetAxis ("Horizontal");
     float moveVertical = Input.GetAxis ("Vertical");
 
-    float cameraHorizontal = Input.GetAxis ("Horizontal2");
-    float cameraVertical = Input.GetAxis ("Vertical2");
+    return new Vector3 (moveHorizontal, 0.0f, moveVertical);
+  }
 
-    Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+  private Vector3 GetRightInput() {
+    float cameraHorizontal = Input.GetAxis ("Horizontal2") * 2.0f;
+    float cameraVertical = Input.GetAxis ("Vertical2") * 2.0f;
 
-    //Swim();
-
-    rb.velocity =  movement * playerSpeed;
+    return new Vector3 (cameraHorizontal, cameraVertical, 0.0f);
   }
 
   void Swim() {
