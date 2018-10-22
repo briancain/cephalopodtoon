@@ -73,6 +73,8 @@ public class Player : MonoBehaviour {
 
   void RotateCamera(Vector3 cameraMovement) {
     GameObject.Find("Main Camera").transform.RotateAround(this.transform.position, new Vector3(0f, cameraMovement.y, 0f), 5.0f);
+    // TODO: Also rotate player here..? what about the Fire method using the
+    // players forward transform? Will it update in time?
   }
 
   private Vector3 GetLeftInput() {
