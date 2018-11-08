@@ -46,11 +46,16 @@ public class Player : MonoBehaviour {
       Vector3 playerPos = gameObject.transform.position;
       Vector3 playerDirection = gameObject.transform.forward;
       Quaternion playerRotation = gameObject.transform.rotation;
-      Debug.Log(playerDirection + " : " + playerRotation);
+
+
       float spawnDistance = 2;
       float bulletForce = 20;
       Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
       spawnPos.y = spawnPos.y + 0.5f;
+
+      Debug.Log("Rotation     :" + playerRotation);
+      //Debug.Log("Direction    :" + playerDirection);
+      //Debug.Log("Bullet Spawn : " + spawnPos);
 
       GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
 
