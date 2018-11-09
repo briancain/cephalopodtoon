@@ -22,5 +22,9 @@ public class Fire : MonoBehaviour {
       rb.velocity = new Vector3(0,0,0);
       // Render splat
     }
+
+    if (collider.gameObject.CompareTag("Player")) {
+      Destroy(gameObject);
+    }
   }
 }
