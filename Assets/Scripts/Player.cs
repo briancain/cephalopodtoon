@@ -70,6 +70,11 @@ public class Player : MonoBehaviour {
 
     RotateCamera(cameraMovement);
     // move player rotation here with movement vector
+    // TODO: Should probably detatch camera as child of player
+    if (movement != Vector3.zero) {
+      transform.rotation = Quaternion.LookRotation(movement);
+    }
+
     rb.velocity =  movement * playerSpeed;
   }
 
