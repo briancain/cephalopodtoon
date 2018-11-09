@@ -52,10 +52,6 @@ public class Player : MonoBehaviour {
       Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
       spawnPos.y = spawnPos.y + 0.5f;
 
-      Debug.Log("Rotation     :" + playerRotation);
-      //Debug.Log("Direction    :" + playerDirection);
-      //Debug.Log("Bullet Spawn : " + spawnPos);
-
       GameObject bullet = (GameObject)Instantiate(bulletPrefab, spawnPos, playerRotation);
 
       bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletForce;
