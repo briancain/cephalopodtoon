@@ -47,7 +47,6 @@ public class Player : MonoBehaviour {
       Vector3 playerDirection = gameObject.transform.forward;
       Quaternion playerRotation = gameObject.transform.rotation;
 
-
       float spawnDistance = 2;
       float bulletForce = 20;
       Vector3 spawnPos = playerPos + playerDirection*spawnDistance;
@@ -74,13 +73,12 @@ public class Player : MonoBehaviour {
     //Swim();
 
     RotateCamera(cameraMovement);
+    // move player rotation here with movement vector
     rb.velocity =  movement * playerSpeed;
   }
 
   void RotateCamera(Vector3 cameraMovement) {
     GameObject.Find("Main Camera").transform.RotateAround(this.transform.position, new Vector3(0f, cameraMovement.y, 0f), 5.0f);
-    // TODO: Also rotate player here..? what about the Fire method using the
-    // players forward transform? Will it update in time?
   }
 
   private Vector3 GetLeftInput() {
